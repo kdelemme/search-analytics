@@ -1,0 +1,21 @@
+{
+  "name": "webmaster-tools",
+  "version": "1.0.0",
+  "description": "Fetch Google Webmaster Tools Analytics every day",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kevin Delemme <kevin.delemme@transferwise.com>",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.1.1",
+    "body-parser": "^1.14.2",
+    "express": "^4.13.3",
+    "googleapis": "^2.1.7",
+    "knex": "^0.8.6",
+    "moment": "^2.10.6",
+    "mysql": "^2.10.0",
+    "ramda": "^0.18.0"
+  }
+}
