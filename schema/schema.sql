@@ -9,5 +9,9 @@ CREATE TABLE analytics(
   ctr DOUBLE,
   position DOUBLE,
   report_from DATE,
-  created_at DATETIME DEFAULT now()
+  created_at TIMESTAMP DEFAULT now()
+);
+
+CREATE TABLE locks(
+  report_date DATE PRIMARY KEY
 );

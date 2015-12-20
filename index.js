@@ -1,27 +1,38 @@
 var config = require('./config/config.js');
-
 var google = require('googleapis');
 var moment = require('moment');
-var googleOAuthClient = require('./lib/google-oauth-client')(config.client_id, config.client_secret, '', config.access_token, config.refresh_token);
+var argv = require('argv');
+var googleOAuthClient = require('./lib/googleOAuthClient');
+var analyticsRepository = require('./lib/repository/sqlAnalyticsRepository')(config.database);
+var locksRepository = require('./lib/repository/sqlLocksRepository')(config.database);
+var locksClient = require('./lib/locksClient')(locksRepository);
 
-googleOAuthClient.authenticate()
+var args = argv.option([
+	{
+		name: 'date',
+		type: 'string',
+		description: 'Fetch analytics report for that specific date',
+		example: "'script --date=YYYY-MM-DD'"
+	}
+]).run();
+
+var reportDate = args.options.date || moment().subtract(3, 'days').format('YYYY-MM-DD');
+
+locksClient.acquireLock(reportDate)
+.then(function() {
+	return googleOAuthClient.authenticate(config.client_id, config.client_secret, config.redirect_url, config.access_token, config.refresh_token);
+})
 .then(function(oauth2Client) {
-	var webmastersClient = google.webmasters({ version: 'v3', auth: oauth2Client });
-	var reportDate = moment().subtract(3, 'days');
-
-	var knex = require('knex')({
-		client: 'mysql',
-		connection: {
-			host     : '127.0.0.1',
-			user     : 'root',
-			password : '',
-			database : 'webmasters'
-		}
-	});
-
-	var analyticsClient = require('./lib/analytics-client')(webmastersClient, knex, reportDate, config.siteUrl);
-	return analyticsClient.fetchAnalytics();
+	var searchAnalyticsClient = google.webmasters({ version: 'v3', auth: oauth2Client }).searchanalytics;
+	var analyticsClient = require('./lib/analyticsClient')(searchAnalyticsClient);
+	
+	return analyticsClient.fetchAnalyticsFrom(reportDate, config.siteUrl);
+})
+.then(function(data) {
+	return analyticsRepository.save(data);
 })
 .then(function() {
 	process.exit(0);
+}, function(err) {
+	process.exit(1);
 });

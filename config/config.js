@@ -8,5 +8,15 @@ module.exports = {
 	client_secret: secret.client_secret,
 	access_token: secret.access_token,
 	refresh_token: secret.refresh_token,
-	siteUrl: 'www.kdelemme.com'
+	redirect_url: 'http://localhost:3000/oauth2callback',
+	siteUrl: 'www.kdelemme.com',
+	database: {
+		client: 'mysql',
+		connection: {
+			host     : '127.0.0.1',
+			user     : 'root',
+			password : '',
+			database : 'webmasters'
+		}
+	}
 }
