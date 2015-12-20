@@ -1,7 +1,7 @@
 'use strict';
 var env = process.env.NODE_ENV == 'production' ? 'production' : 'development';
 var home = process.env.HOME;
-var secret = require(home + '/.tw/secret.json')['analytics'][env];
+var secret = require(home + '/.tw/secret.json')['webmasters'][env];
 
 module.exports = {
 	client_id: secret.client_id,
@@ -9,14 +9,14 @@ module.exports = {
 	access_token: secret.access_token,
 	refresh_token: secret.refresh_token,
 	redirect_url: 'http://localhost:3000/oauth2callback',
-	siteUrl: 'www.kdelemme.com',
+	siteUrl: encodeURIComponent('https://transferwise.com'),
 	database: {
-		client: 'mysql',
+		client: secret.database.client,
 		connection: {
-			host     : '127.0.0.1',
-			user     : 'root',
-			password : '',
-			database : 'webmasters'
+			host     : secret.database.connection.host,
+			user     : secret.database.connection.user,
+			password : secret.database.connection.password,
+			database : secret.database.connection.database
 		}
 	}
 }
