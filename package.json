@@ -11,8 +11,6 @@
   "dependencies": {
     "argv": "0.0.2",
     "bluebird": "^3.1.1",
-    "body-parser": "^1.14.2",
-    "express": "^4.13.3",
     "googleapis": "^2.1.7",
     "knex": "^0.8.6",
     "moment": "^2.10.6",
