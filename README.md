@@ -1,6 +1,6 @@
-# Webmasters Tool
+# Search Analytics Gatherer
 
-Fetch the daily analytics from Google Webmasters Tools.
+Fetch the search analytics data from Google Webmasters Tools from a specific date.
 
 # Installation
 
