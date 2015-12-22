@@ -10,7 +10,7 @@ Create `~/.tw/secret.json` containing:
 
 ```
 {
-	"webmasters": {
+	"search_analytics": {
 		"development": {
 			"client_id": "GOOGLE_CLIENT_ID",
 			"client_secret": "GOOGLE_CLIENT_SECRET",

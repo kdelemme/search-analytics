@@ -1,7 +1,7 @@
 'use strict';
 var env = process.env.NODE_ENV == 'production' ? 'production' : 'development';
 var home = process.env.HOME;
-var secret = require(home + '/.tw/secret.json')['webmasters'][env];
+var secret = require(home + '/.tw/secret.json')['search_analytics'][env];
 
 module.exports = {
 	client_id: secret.client_id,
