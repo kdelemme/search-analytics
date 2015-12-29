@@ -1,4 +1,6 @@
-var config = require('./config/config.js');
+'use strict';
+var env = process.env.NODE_ENV == 'production' ? 'production' : 'development';
+var config = require('./config/' + env);
 var google = require('googleapis');
 var moment = require('moment');
 var argv = require('argv');
