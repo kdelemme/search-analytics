@@ -23,18 +23,11 @@ describe('AnalyticsClient', function() {
 		var searchAnalyticsClientMock = buildSearchAnalyticsClientMockWithData({
 			rows: [
 				{
-					keys: ['uk', 'desktop', 'www.example.com/page', 'search query'], 
+					keys: ['uk', 'not_relevant', 'www.example.com/page', 'search query'], 
 					clicks: 12, 
 					impressions: 120, 
 					ctr: 0.1, 
 					position: 3
-				},
-				{
-					keys: ['fra', 'mobile', 'www.example.com/page', 'search query'], 
-					clicks: 5, 
-					impressions: 10, 
-					ctr: 0.5, 
-					position: 2
 				}
 			]
 		});
@@ -42,9 +35,9 @@ describe('AnalyticsClient', function() {
 
 		analyticsClient.fetchAnalyticsFrom('2015-12-10', 'www.example.com')
 		.then(function(data) {
-			expect(data).to.have.length(2);
+			expect(data).to.have.length(3);
 			expect(data[0]).to.have.property('country', 'uk');
-			expect(data[0]).to.have.property('device', 'desktop');
+			expect(data[0]).to.have.property('device', 'not_relevant');
 			expect(data[0]).to.have.property('page', 'www.example.com/page');
 			expect(data[0]).to.have.property('query', 'search query');
 			expect(data[0]).to.have.property('clicks', 12);
