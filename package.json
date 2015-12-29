@@ -1,9 +1,10 @@
 {
-  "name": "webmaster-tools",
+  "name": "search-analytics-gatherer",
   "version": "1.0.0",
-  "description": "Fetch Google Webmaster Tools Analytics every day",
+  "description": "Fetch search analytics data at a specific date",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "mocha"
   },
   "author": "Kevin Delemme <kevin.delemme@transferwise.com>",
