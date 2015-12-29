@@ -47,7 +47,7 @@ Run the docker instance:
 
 ```
 docker run \
--e "NODE_ENV=production"
+-e "NODE_ENV=production" \
 -e "CLIENT_ID=GOOGLE_CLIENT_ID" \
 -e "CLIENT_SECRET=GOOGLE_CLIENT_SECRET" \
 -e "ACCESS_TOKEN=GOOGLE_ACCESS_TOKEN" \
